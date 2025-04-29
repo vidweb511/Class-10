@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Special Gift 💝</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive;
+      touch-action: pan-y;
+    }
+
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      filter: blur(10px) brightness(0.5);
+      z-index: -1;
+      transition: background-image 1s ease;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .photo {
+      max-width: 80%;
+      max-height: 60vh;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #fff;
+      transition: all 0.5s ease;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="background" id="background"></div>
+  <div class="container" id="swipeArea">
+    <img id="photo" class="photo" src="" alt="Photo"/>
+    <p id="message" class="message"></p>
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const userData = {
+      "arunima": {
+        photos: ["arunima1.jpg",
+        "arunima2.jpg",
+        "arunima3.jpg",
+        "arunima4.jpg",
+        "arunima5.jpg",
+        "arunima6.jpg",
+        "arunima7.jpg",
+        "arunima8.jpg",
+        "arunima9.jpg",
+        "arunima10.jpg",
+        "arunima11.jpg",
+
+],
+        messages: [
+          "Soo Here comes the one who has infinitely different moods kabhi itna khush toh kabhi itna dukhh",
+          "kabhii itna gussa ki koi bhii drr jaye prr most of the time she thinks about others apne se bhi pehle",
+          "She thinks she was dumb and childish pehle prr you can see in above photo ki how creative and mehnati thii aur haii",
+          "Though she was soo cutee bachpan mein without skincare but now..... chalo koi naa time changes and people too",
+          "I know it's difficult to cope up with health and another different problems of life with studies ",
+          "Prr krna padta hai everyone has to do it in student life and see how happy you are in all these photos",
+          "Just remember your good old days and continue and leave your theory of sadness for studies and be happy",
+          "Bachpan mein bhii toh khushh ho kar saree kamm karti thii na so continue that theory of happiness",
+          "Be happy and agar kabhi jyada hii dukhh ho rha ho toh just remember your old days when you were extremely happy",
+          "And thanks for everything especially to make me realize the importance of this bright one/somebody in this dark world/life",
+          "And let it be for the last time  Going to sleep  Byeeeeee "
+        ],
+        music: "Blue 2.0.mp3"
+      },
+      "ashwin": {
+        photos: ["ashwin1.jpg",
+        "ashwin2.jpg",
+        "ashwin3.jpg",
+        "ashwin4.jpg",
+        "ashwin5.jpg",
+        "ashwin6.jpg",
+        "ashwin7.jpg",
+        "ashwin8.jpg",
+        "ashwin9.jpg",
+        "ashwin10.jpg",
+        "ashwin11.jpg",
+        "ashwin12.jpg",
+        ],
+        messages: [
+          "Soo ye hai kada chaku but pehle his zindagi was going in full maze but 2024 was the turning point of life",
+          "Tohh baat ye hai bhaiii ki thii dasvi kaksha prr firr enters an angel in his life by which he realizes his aim",
+          "First of all thanks to the angel to show our bhaiii a way to his aim in life",
+          "Haa toh bhaii ab raste pe hai aur bhaiii ki photos to dekhoo kaise chamak rha hai",
+          "Vo baat alag hai ki photo lete time brightnesss 2x karke photo lenii padti hai",
+          "Aur rahi baat group photos ki usme mein toh bhaii alag hii compete karta rehta hai",
+          "Kabhi kabhi now also he does things like I'm a chappri jaise iss photo mein prr chalta hai",
+          "Ek meme toh banti hai bhaiii pe khatarnak walii : Oyee kaalu kaalu ",
+          "Haa yehi hai vo hamare group mein jiski communication skills achhe hai aur kaam bhi aa jata hai ",
+          "Skills toh hai but kabhi kabhi bhaiii apne gusse pe control hii nhi krr pata and then....",
+          "Yehi hai vo jo hamesha sabse jyada maze leta hai prr karma comes back isliye rotaa bhi hai",
+          "Chalo jaisa bhi hai hamara achaa dost hai aur chaiye hii kyaa"
+        ],
+        music: "Passo.mp3"
+      },
+      "class 10": {
+        photos: ["class1.jpg",
+        "class2.jpg",
+        "class3.jpg",
+        "class4.jpg",
+        "class5.jpg",
+        "class6.jpg",
+        "class7.jpg",
+        "class8.jpg",
+        "class9.jpg",
+        "class10.jpg",
+        "class11.jpg",
+        "class12.jpg",
+        "class13.jpg",
+        ],
+        messages: [
+          "Soo ye hai hamarii dasvi kaksha ka group jisme aapko hrr tarike ke bacche mil jayengee",
+          "Toh hamarii dasvi kaksha ko picnic ke naam pe rashtrpati bhawan leke gyee thee",
+          "Jisme almost sabhi bachee gyee thee aur ptaa nhi kyu prr boys toh saree aane ke baad dukhh se bharre hue thee",
+          "Someone asked me that after ending this class if I would be able to recall this soo...",
+          "Soo now I can most probably say yes to that person.Can I??",
+          "Seriously iss kaksha se achhi,sanskari aur khatarnaak kaksha koi ho sakti hai kyaa",
+          "Kya nahii hai iss kaksha mein bodybuilder se leke beatboxer tak aurr padhai ka competition next level",
+          "Aur ladkiyon mein toh competition alag level pe paunchh rakha hai koi dancer koi singer koi fighter ",
+          "Puree school ki sabse achhi kaksha manni gyii hai hamari kaksha teacher se leke principal tak ko khussh kiya hai",
+          "Prr haa aise nhii hai duniya bharr ke sanskari bachee hamari kaksha mein bharee pade hai kuch kuch hai...",
+          "Ye ek dusrii trip ki photos jisme selected bachon ke lejaya gyaa toh vo yehii bachee hai",
+          "Waise baatein toh dhyan se sunn hii lete hai shanti se baith ke aur kuch karen na karen",
+          "And this photo is a special one jisme saree bacho ka partt hai but it carries a different story for maker"
+
+        ],
+        music: "memories.mp3"
+      },
+      "hemu": {
+        photos: ["hemu1.jpg",
+        "hemu2.jpg",
+        "hemu3.jpg",
+        "hemu4.jpg",
+        "hemu5.jpg",
+        "hemu6.jpg",
+        "hemu7.jpg",
+        "hemu8.jpg",
+        "hemu9.jpg",
+        "hemu10.jpg",
+        "hemu11.jpg",
+        "hemu12.jpg",
+        ],
+        messages: [
+          "Soo this is the one of the most famous youtuber in our class known as latahema2229 ",
+          "Ek era aise tha jab sabki juban parr yahi naam hota thaa bss hemuuu,sabka pyaar ",
+          "Aisa possible hai ki ek baar bachee classmates ka naam bhul jaye but iss youtuber ka nahii",
+          "Waise toh sabne bahut baar dekha hai iss famous youtuber ko youtube pe",
+          "But jo reality mein mile hain they know how dangerous she is,prr youtube pe nhii",
+          "Pasand sabko hai ye youtuber but the sad part is koi subscribe hii nhi karta",
+          "Everyone says subscriber bhadwa dunga but nobody supports her even when she posts quality content",
+          "But ek dinn pakka hum sabka pyaar jarur successful hoga",
+          "Even now hum toh successful maante hain kyunki jab we got to know it for the first time ....",
+          "There were only 150 subscribers and now she has become more famous with 450+ subscribers",
+          "We all are expecting that she hits 500+ subscribers as soon as possible ",
+          "We had done our all possible efforts including bus posters advertisement with target 10k subscribers"
+        ],
+      },
+      "ina": {
+        photos: ["ina1.jpg",
+        "ina2.jpg",
+        "ina3.jpg",
+        "ina4.jpg",],
+        messages: [
+          "Soo ye hai hamarii puranii mitr jisne hamara sath 9th mein hii chodd diya",
+          "She went to kerala but kam se kam as a good friend she maintained friendship",
+          "Though she tries every time to surprise all of the friends but she fails everytime",
+          "She even helps jab bhi anyone wants without hesitation and is chill evrytime"
+        ],
+        music: "Maula mere.mp3"
+      },
+      "kanishk": {
+        photos: ["kani1.jpg",
+        "kani2.jpg",
+        "kani3.jpg",
+        "kani4.jpg",
+        "kani5.jpg",
+        "kani6.jpg",],
+        messages: [
+          "Soo ye hai hamare group ka bodybuilder aur asthetic ka 14 bhi bana hii rehta hai",
+          "Toh bhaii ka past thoda kharab rha hai prr ab bhaiii sudhar rha hai aur padh bhi rha hai",
+          "Bhaiii ki monopoly hai armwrestling and running mein toh no competition ",
+          "Bss height kmm hai bhaiii ki thodi varna toh bhaiii ke samne koi kuch bol sakta hai kyaa",
+          "POV : When phython developer meets web developer using HTML,CSS and JS",
+          "Bhaiii ki iss se bdiya photo leke toh dikha de koi bilkul khatam hai duniya iske baad"
+
+        ],
+        music: "montagem t.mp3"
+      },
+      "tanishq": {
+        photos: ["tanu1.jpg",
+        "tanu2.jpg",
+        "tanu3.jpg",
+        "tanu4.jpg",
+        "tanu5.jpg",
+        "tanu6.jpg",
+        "tanu7.jpg",
+        "tanu8.jpg",
+        "tanu9.jpg",
+        "tanu10.jpg",
+      ],
+        messages: [
+          "Soo finally ye hai humaree most famous youtuber ki santan ",
+          "Jisse hum uske naam se kmm uski famous youtuber mummy ke naam se jyada bulate hai",
+          "Kam se kam now he knows ki bhaiii ko karna kya hai life mein and even he is working for it",
+          "Prr kuch bhi ho jayee jhukega nhi bhaiii apna ek baar ke liye pushpa bhii",
+          "Prr bhaii ka swag aur style alag hii hai toh jhukne ka toh sawal hii nhi hai",
+          "Bhaii hai dusra bodybuilder full bulking jab tak 150kg ka nhi ho jata",
+          "Firr bhaii start karega cutt bss karte karte bhaii ka naa katt jaye",
+          "Ab aa rhee hai naa bhaii ke asthetic poses camera mein mat dekh liyoo",
+          "Bhaiii ek sath sab kuch karta hai boxing,martial arts,NDA,school aur pta nhii kya kyaa",
+          "Bhaiii jaldi se jaldi famous ho so hum bhi bol sake famous youtuber hai hamaree group mein"
+        ],
+        music: "Montagem l.mp3"
+      },
+
+      // Add more users here
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name")?.toLowerCase();
+    if (!userData[name]) {
+      alert("Name not recognized. Please try again.");
+      window.location.href = "index.html";
+    }
+
+    const photos = userData[name].photos;
+    const messages = userData[name].messages;
+    const music = userData[name].music;
+
+    let currentIndex = 0;
+    const photoEl = document.getElementById('photo');
+    const messageEl = document.getElementById('message');
+    const backgroundEl = document.getElementById('background');
+    const musicPlayer = document.getElementById('bgMusic');
+
+    function showSlide(index) {
+      photoEl.src = photos[index];
+      messageEl.textContent = messages[index];
+      backgroundEl.style.backgroundImage = `url('${photos[index]}')`;
+    }
+
+    window.onload = () => {
+      showSlide(0);
+      musicPlayer.querySelector('source').src = music;
+      musicPlayer.load();
+      musicPlayer.play().catch(() => {
+        console.log("Autoplay blocked. User interaction required.");
+      });
+    };
+
+    // Swipe & Mouse Drag Handling
+    let startX = 0;
+    let isDragging = false;
+
+    const swipeArea = document.getElementById('swipeArea');
+
+    swipeArea.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    swipeArea.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      handleSwipe(endX - startX);
+    });
+
+    swipeArea.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+    });
+
+    swipeArea.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const endX = e.clientX;
+      handleSwipe(endX - startX);
+    });
+
+    function handleSwipe(deltaX) {
+      if (Math.abs(deltaX) > 50) {
+        if (deltaX < 0) {
+          // Swipe Left – Next
+          currentIndex = (currentIndex + 1) % photos.length;
+        } else {
+          // Swipe Right – Previous
+          currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+        }
+        showSlide(currentIndex);
+      }
+    }
+  </script>
+</body>
+</html>
